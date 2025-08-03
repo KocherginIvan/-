@@ -11,14 +11,15 @@ while True:
 2. Удалить (файл/папку) 
 3. Копировать (файл/папку) 
 4. Просмотр содержимого рабочей директории 
-5. Посмотреть только папки 
-6. Посмотреть только файлы 
-7. Просмотр информации об операционной системе 
-8. Создатель программы 
-9. Играть в викторину 
-10. Мой банковский счет 
-11. Смена рабочей директории 
-12. Выход \n''')
+5. Сохранить содержимое рабочей директории в файл
+6. Посмотреть только папки 
+7. Посмотреть только файлы 
+8. Просмотр информации об операционной системе 
+9. Создатель программы 
+10. Играть в викторину 
+11. Мой банковский счет 
+12. Смена рабочей директории 
+13. Выход \n''')
     if arg == '1':
         dir_name = input('Введите имя создаваемой папки: ')
         dfc.create_dir(dir_name)
@@ -35,27 +36,29 @@ while True:
     if arg == '4':
         print(*os.listdir())
     if arg == '5':
+        dfc.list_dir_file()
+    if arg == '6':
         for i  in os.listdir():
             if '.' not in i:
                 print(f'{i}')
-    if arg == '6':
+    if arg == '7':
         for i in os.listdir():
             if '.' in i:
                 print(f'{i}')
-    if arg == '7':
+    if arg == '8':
         os_detail = sys.platform
         print(f'Ваша система: {sys.platform}\nИмя системы: {os.name}')
-    if arg == '8':
-        print('Программу создал Иван Кочергин')
     if arg == '9':
-        victory()
+        print('Программу создал Иван Кочергин')
     if arg == '10':
-        account, dictionary = my_account(account, dictionary)
+        victory()
     if arg == '11':
+        account, dictionary = my_account(account, dictionary)
+    if arg == '12':
         ch_dir = input('Введите путь к директории: ')
         if ch_dir.startswith(':', 2) or ch_dir.startswith('/'):
             os.chdir(ch_dir)
         else:
             os.chdir(ch_dir)
-    if arg == '12':
+    if arg == '13':
         break
