@@ -1,5 +1,7 @@
 import os
 import shutil
+from moduls.decorator import add_seporator
+
 def del_dir(dir_name):
     path = os.path.join(os.getcwd(), dir_name)
     if os.path.exists(path):

@@ -27,19 +27,15 @@ def victory():
     while a == False:
         rand = rand_num(num, count=5)
         true_answer = 0
-        false_answer = 0
         for i in rand:
-            print(f'В каком году родился {avtor[i]} ?')
+            print(f'Когда родился {avtor[i]}?')
             answer = input('Ваш ответ в формате дд.мм.гггг: ')
-            if answer == date[i]:
-                true_answer += 1
-            else:
-                false_answer += 1
-                print(f'Правильный ответ:  {avtor[i]} родился {date_2[i]}')
+            true_answer += 1 if answer.lower() == date[i].lower() else 0
+            print(f'Правильный ответ:  {avtor[i]} родился {date_2[i]}')
         print(f'Количество правильных ответов = {true_answer}')
-        print(f'Количество неправильных ответов = {false_answer}')
+        print(f'Количество неправильных ответов = {len(rand) - true_answer}')
         print(f'процент правильных ответов = {true_answer*100/5} %')
-        print(f'Процент неверных ответов = {false_answer*100/5} %')
+        print(f'Процент неверных ответов = {(len(rand) - true_answer)*100/5} %')
         b = False
         while not b:
             again = input('Хотите сыграть еще раз? Да/Нет  ')
