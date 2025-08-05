@@ -1,5 +1,7 @@
 import os
 import shutil
+from moduls.decorator import add_seporator
+
 def del_dir(dir_name):
     path = os.path.join(os.getcwd(), dir_name)
     if os.path.exists(path):
@@ -31,3 +33,26 @@ def copy_file(file_name, file_name_new):
         path_2 = os.path.join(os.getcwd(), file_name_new)
         shutil.copytree(path, path_2)
     pass
+def list_dir_file():
+    f = open('list_dir.txt', 'w', encoding='utf-8')
+    dir_list = ['dirs:']
+    file_list = ['files:']
+    d = 0
+    fi = 0
+    for i in os.listdir():
+        if '.' not in i:
+            if d == 0:
+                dir_list.append(f' {i}')
+                d = 1
+            else:
+                dir_list.append(f', {i}')
+        else:
+            if fi == 0:
+                file_list.append(f' {i}')
+                fi = 1
+            else:
+                file_list.append(f', {i}')
+    f.writelines(file_list)
+    f.write('\n')
+    f.writelines(dir_list)
+    f.close()

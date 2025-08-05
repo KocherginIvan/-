@@ -1,3 +1,7 @@
+import os
+from moduls.write_read_json import create_json , read_data_json
+
+
 def change_account(account, add_accout = 0, turn_accout = 0):
     account_1 = account + add_accout - turn_accout
     return account_1
@@ -6,6 +10,10 @@ def change_dictionary_purchase(dictionary = {'покупка': [],'цена': []
     dictionary['цена'] += add_price
     return dictionary
 def my_account(account = 0, dictionary= {'покупка': [],'цена': []}):
+    if 'account.json' in os.listdir():
+        account = read_data_json('account')
+    if 'purchase.json' in os.listdir():
+        dictionary = read_data_json('purchase')
     while True:
         print('1. пополнение счета')
         print('2. покупка')
@@ -16,6 +24,7 @@ def my_account(account = 0, dictionary= {'покупка': [],'цена': []}):
             print(f'Сейчас на счету: {account}')
             adding = input('Пополнить счет на сумму: ')
             account = change_account(account, add_accout = int(adding), turn_accout = 0)
+            create_json(account, 'account')
             pass
         elif choice == '2':
             purchase_amount = input('Сумма покупки: ')
@@ -25,6 +34,8 @@ def my_account(account = 0, dictionary= {'покупка': [],'цена': []}):
                 purchase_name = input('Наименование покупки: ')
                 dictionary = change_dictionary_purchase(dictionary=dictionary, add_purchase=[purchase_name], add_price=[int(purchase_amount)])
                 account = change_account(account, add_accout = 0, turn_accout = int(purchase_amount))
+                create_json(dictionary, 'purchase')
+                create_json(account, 'account')
             pass
         elif choice == '3':
             print('История Ваших покупок: \n')
@@ -36,3 +47,5 @@ def my_account(account = 0, dictionary= {'покупка': [],'цена': []}):
         else:
             print('Неверный пункт меню')
     return account, dictionary
+if __name__ == '__main__':
+    account, dictionary = my_account()
